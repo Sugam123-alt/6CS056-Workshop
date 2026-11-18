@@ -1,47 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Student</title>
-</head>
-<body>
+<x-layouts.app title="Edit Student">
     <h1>Edit Student</h1>
-
-    <form action="/students/{{ $student->id }}" method="POST">
+    <form action="{{ route('students.update', $student) }}" method="POST">
         @csrf
         @method('PUT')
-
-        <label>Name:</label>
-        <input type="text" name="name"
-               value="{{ old('name', $student->name) }}">
-        @error('name') <div>{{ $message }}</div> @enderror
-        <br><br>
-
-        <label>Email:</label>
-        <input type="email" name="email"
-               value="{{ old('email', $student->email) }}">
-        @error('email') <div>{{ $message }}</div> @enderror
-        <br><br>
-
-        <label>Phone:</label>
-        <input type="text" name="phone"
-               value="{{ old('phone', $student->phone) }}">
-        @error('phone') <div>{{ $message }}</div> @enderror
-        <br><br>
-
-        <label>Address:</label>
-        <textarea name="address">{{ old('address', $student->address) }}</textarea>
-        @error('address') <div>{{ $message }}</div> @enderror
-        <br><br>
-
-        <label>Date of Birth:</label>
-        <input type="date" name="date_of_birth"
-               value="{{ old('date_of_birth', $student->date_of_birth) }}">
-        @error('date_of_birth') <div>{{ $message }}</div> @enderror
-        <br><br>
-
-        <button type="submit">Update Student</button>
+        <x-students.form :student="$student" />
+        <button type="submit" class="btn">Update Student</button>
+        <a href="{{ route('students.show', $student) }}">Cancel</a>
     </form>
-
-    <a href="/students/{{ $student->id }}">Cancel</a>
-</body>
-</html>
+</x-layouts.app>
